@@ -14,11 +14,11 @@ export class DetalleVenta {
   @PrimaryGeneratedColumn('identity')
   id: number;
 
-  @Column('int', { name: 'venta_id', nullable: false })
-  ventaId: number;
+  @Column('integer', { name: 'id_venta', nullable: false })
+  idVenta: number;
 
-  @Column('int', { name: 'producto_id', nullable: false })
-  productoId: number;
+  @Column('integer', { name: 'id_producto', nullable: false })
+  idProducto: number;
 
   @Column('varchar', { length: 150, nullable: false })
   nombreProducto: string;
@@ -26,7 +26,7 @@ export class DetalleVenta {
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
   precioUnitario: number;
 
-  @Column('int', { nullable: false })
+  @Column('integer', { nullable: false })
   cantidad: number;
 
   @Column('decimal', { precision: 10, scale: 2, nullable: false })
@@ -39,10 +39,10 @@ export class DetalleVenta {
   fechaCreacion: Date;
 
   @ManyToOne(() => Venta, (venta) => venta.detalles, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'venta_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'id_venta', referencedColumnName: 'id' })
   venta: Venta;
 
   @ManyToOne(() => Producto, (producto) => producto.detalles, { onDelete: 'RESTRICT' })
-  @JoinColumn({ name: 'producto_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'id_producto', referencedColumnName: 'id' })
   producto: Producto;
 }

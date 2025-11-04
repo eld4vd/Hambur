@@ -3,6 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { CategoriasService } from './categorias.service';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
+import { Public } from 'src/auth/decorators/auth-public.decorator';
 
 @ApiTags('categorias')
 @Controller('categorias')
@@ -14,11 +15,13 @@ export class CategoriasController {
     return this.categoriasService.create(createCategoriaDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.categoriasService.findAll();
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.categoriasService.findOne(+id);

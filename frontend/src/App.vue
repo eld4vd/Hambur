@@ -1,26 +1,29 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { computed } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
 import MainHeader from './components/MainHeader.vue'
 import MainFooter from './components/MainFooter.vue'
+
+const route = useRoute()
+
+// Rutas donde NO se debe mostrar header y footer
+const routesWithoutLayout = computed(() => {
+  const path = route.path
+  return path.startsWith('/dashboard') || path === '/login'
+})
 </script>
 
 <template>
-  <MainHeader />
+  <MainHeader v-if="!routesWithoutLayout" />
   <RouterView />
-  <MainFooter />
+  <MainFooter v-if="!routesWithoutLayout" />
 </template>
 
 <style>
-/* Reset de estilos de Vue para usar solo el template */
+/* Estilos mínimos de App.vue - el resto está en fix-styles.css */
 #app {
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
-}
-
-* {
-  margin: 0;
-  padding: 0;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 </style>

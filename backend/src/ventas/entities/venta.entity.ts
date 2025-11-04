@@ -41,8 +41,8 @@ export class Venta {
   @Column('varchar', { length: 50, unique: true, nullable: false })
   numeroVenta: string;
 
-  @Column('int', { name: 'empleado_id', nullable: true })
-  empleadoId: number;
+  @Column('integer', { name: 'id_empleado', nullable: true })
+  idEmpleado: number;
 
   @Column('enum', { enum: TipoVenta, nullable: false })
   tipoVenta: TipoVenta;
@@ -83,14 +83,14 @@ export class Venta {
   @CreateDateColumn({ name: 'fecha_venta' })
   fechaVenta: Date;
 
-  @UpdateDateColumn({ name: 'ultima_actualizacion' })
-  ultimaActualizacion: Date;
+  @UpdateDateColumn({ name: 'fecha_modificacion' })
+  fechaModificacion: Date;
 
-  @DeleteDateColumn({ name: 'fecha_eliminacion', select: false })
+  @DeleteDateColumn({ name: 'fecha_eliminacion' })
   fechaEliminacion: Date;
 
   @ManyToOne(() => Empleado, (empleado) => empleado.ventas)
-  @JoinColumn({ name: 'empleado_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'id_empleado', referencedColumnName: 'id' })
   empleado: Empleado;
 
   @OneToMany(() => DetalleVenta, (detalle) => detalle.venta)

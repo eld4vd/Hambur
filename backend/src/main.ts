@@ -24,6 +24,8 @@ async function bootstrap() {
     .addTag('empleados')
     .addTag('categorias')
     .addTag('productos')
+    .addTag('ingredientes')
+    .addTag('producto-ingredientes')
     .addTag('ventas')
     .addTag('detalle-ventas')
     .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT', in: 'header' })
@@ -32,5 +34,6 @@ async function bootstrap() {
   SwaggerModule.setup('apidoc', app, document);
 
   await app.listen(process.env.PORT ?? 3000);
+  console.log(`App corriendo en ${await app.getUrl()}/apidoc`);
 }
 bootstrap();

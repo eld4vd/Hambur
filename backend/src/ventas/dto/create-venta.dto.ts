@@ -1,18 +1,54 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, MaxLength } from 'class-validator';
+import { IsEnum, IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, MaxLength, IsArray, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 import { TipoVenta, MetodoPago, EstadoVenta } from '../entities/venta.entity';
 
-export class CreateVentaDto {
+export class CreateDetalleVentaDto {
   @ApiProperty()
-  @IsNotEmpty({ message: 'El campo numeroVenta es obligatorio' })
-  @IsString({ message: 'El campo numeroVenta debe ser de tipo cadena' })
-  @MaxLength(50, { message: 'El campo numeroVenta no debe ser mayor a 50 caracteres' })
-  readonly numeroVenta: string;
+  @IsNotEmpty({ message: 'El idProducto es obligatorio' })
+  @IsInt({ message: 'El idProducto debe ser un número entero' })
+  readonly idProducto: number;
+
+  @ApiProperty()
+  @IsNotEmpty({ message: 'El nombreProducto es obligatorio' })
+  @IsString({ message: 'El nombreProducto debe ser una cadena' })
+  readonly nombreProducto: string;
+
+  @ApiProperty()
+  @IsNotEmpty({ message: 'El precioUnitario es obligatorio' })
+  @IsNumber({}, { message: 'El precioUnitario debe ser un número' })
+  @IsPositive({ message: 'El precioUnitario debe ser positivo' })
+  readonly precioUnitario: number;
+
+  @ApiProperty()
+  @IsNotEmpty({ message: 'La cantidad es obligatoria' })
+  @IsInt({ message: 'La cantidad debe ser un número entero' })
+  @IsPositive({ message: 'La cantidad debe ser positiva' })
+  readonly cantidad: number;
+
+  @ApiProperty()
+  @IsNotEmpty({ message: 'El subtotal es obligatorio' })
+  @IsNumber({}, { message: 'El subtotal debe ser un número' })
+  @IsPositive({ message: 'El subtotal debe ser positivo' })
+  readonly subtotal: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsInt({ message: 'El campo empleadoId debe ser un número entero' })
-  readonly empleadoId?: number;
+  @IsString({ message: 'Las notas deben ser una cadena' })
+  readonly notas?: string;
+}
+
+export class CreateVentaDto {
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString({ message: 'El campo numeroVenta debe ser de tipo cadena' })
+  @MaxLength(50, { message: 'El campo numeroVenta no debe ser mayor a 50 caracteres' })
+  readonly numeroVenta?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt({ message: 'El campo idEmpleado debe ser un número entero' })
+  readonly idEmpleado?: number;
 
   @ApiProperty({ enum: TipoVenta })
   @IsNotEmpty({ message: 'El campo tipoVenta es obligatorio' })
@@ -73,4 +109,11 @@ export class CreateVentaDto {
   @IsOptional()
   @IsString({ message: 'El campo notasInternas debe ser de tipo cadena' })
   readonly notasInternas?: string;
+
+  @ApiProperty({ type: [CreateDetalleVentaDto], required: false })
+  @IsOptional()
+  @IsArray({ message: 'Los detalles deben ser un array' })
+  @ValidateNested({ each: true })
+  @Type(() => CreateDetalleVentaDto)
+  readonly detalles?: CreateDetalleVentaDto[];
 }

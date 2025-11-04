@@ -3,12 +3,15 @@ import { ApiTags } from '@nestjs/swagger';
 import { EmpleadosService } from './empleados.service';
 import { CreateEmpleadoDto } from './dto/create-empleado.dto';
 import { UpdateEmpleadoDto } from './dto/update-empleado.dto';
+import { Public } from 'src/auth/decorators/auth-public.decorator';
 
 @ApiTags('empleados')
 @Controller('empleados')
 export class EmpleadosController {
   constructor(private readonly empleadosService: EmpleadosService) {}
 
+  // NOTA: Descomentar @Public() solo para crear el primer empleado en desarrollo
+  // @Public()
   @Post()
   create(@Body() createEmpleadoDto: CreateEmpleadoDto) {
     return this.empleadosService.create(createEmpleadoDto);

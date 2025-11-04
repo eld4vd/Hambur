@@ -28,4 +28,9 @@ export class CreateCategoriaDto {
   @IsOptional()
   @IsInt({ message: 'El campo orden debe ser de tipo numérico' })
   readonly orden?: number;
+
+  @ApiProperty({ default: false })
+  @IsOptional()
+  @IsBoolean({ message: 'El campo requierePersonalizacion debe ser de tipo booleano' })
+  readonly requierePersonalizacion?: boolean;
 }

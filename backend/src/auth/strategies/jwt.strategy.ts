@@ -6,13 +6,12 @@ import { JwtPayload } from '../interfaces/jwt-payload.interface';
 import { Empleado } from 'src/empleados/entities/empleado.entity';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
+export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly authService: AuthService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.JWT_TOKEN ?? '',
+      secretOrKey: process.env.JWT_SECRET || 'secret-key',
       ignoreExpiration: false,
-      passReqToCallback: false,
     });
   }
 

@@ -3,14 +3,14 @@ import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString, MaxLengt
 
 export class CreateDetalleVentaDto {
   @ApiProperty()
-  @IsNotEmpty({ message: 'El campo ventaId es obligatorio' })
-  @IsInt({ message: 'El campo ventaId debe ser un número entero' })
-  readonly ventaId: number;
+  @IsNotEmpty({ message: 'El campo idVenta es obligatorio' })
+  @IsInt({ message: 'El campo idVenta debe ser un número entero' })
+  readonly idVenta: number;
 
   @ApiProperty()
-  @IsNotEmpty({ message: 'El campo productoId es obligatorio' })
-  @IsInt({ message: 'El campo productoId debe ser un número entero' })
-  readonly productoId: number;
+  @IsNotEmpty({ message: 'El campo idProducto es obligatorio' })
+  @IsInt({ message: 'El campo idProducto debe ser un número entero' })
+  readonly idProducto: number;
 
   @ApiProperty()
   @IsNotEmpty({ message: 'El campo nombreProducto es obligatorio' })

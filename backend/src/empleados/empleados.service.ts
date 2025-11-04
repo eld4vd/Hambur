@@ -19,16 +19,18 @@ export class EmpleadosService {
 
   async create(createEmpleadoDto: CreateEmpleadoDto): Promise<Empleado> {
     const existe = await this.empleadosRepository.findOneBy({
-      email: createEmpleadoDto.email.trim(),
+      usuario: createEmpleadoDto.usuario.trim(),
     });
 
     if (existe) throw new ConflictException('El empleado ya existe');
 
     const empleado = new Empleado();
+    empleado.usuario = createEmpleadoDto.usuario.trim();
+    empleado.clave = createEmpleadoDto.clave;
     empleado.nombre = createEmpleadoDto.nombre.trim();
     empleado.email = createEmpleadoDto.email.trim();
-    empleado.password = createEmpleadoDto.password;
     empleado.telefono = createEmpleadoDto.telefono?.trim() ?? '';
+    empleado.rol = createEmpleadoDto.rol ?? 'empleado';
     empleado.activo = createEmpleadoDto.activo ?? true;
     
     return this.empleadosRepository.save(empleado);
@@ -55,19 +57,19 @@ export class EmpleadosService {
     return this.empleadosRepository.softRemove(empleado);
   }
 
-  async validate(email: string, password: string): Promise<Empleado> {
+  async validate(usuario: string, clave: string): Promise<Empleado> {
     const empleado = await this.empleadosRepository.findOne({
-      where: { email },
-      select: ['id', 'nombre', 'email', 'password', 'telefono', 'activo'],
+      where: { usuario },
+      select: ['id', 'usuario', 'clave', 'nombre', 'email', 'telefono', 'rol', 'activo'],
     });
 
     if (!empleado) throw new NotFoundException('Empleado inexistente');
 
-    if (!(await empleado?.validatePassword(password))) {
-      throw new UnauthorizedException('Contraseña incorrecta');
+    if (!(await empleado?.validatePassword(clave))) {
+      throw new UnauthorizedException('Clave incorrecta');
     }
 
-    empleado.password = '';
+    delete empleado.clave;
     return empleado;
   }
 }

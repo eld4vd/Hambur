@@ -26,16 +26,19 @@ export class Categoria {
   @Column('boolean', { default: true })
   activo: boolean;
 
-  @Column('int', { default: 0 })
+  @Column('integer', { default: 0 })
   orden: number;
+
+  @Column('boolean', { default: false, name: 'requiere_personalizacion' })
+  requierePersonalizacion: boolean;
 
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
 
-  @UpdateDateColumn({ name: 'ultima_actualizacion' })
-  ultimaActualizacion: Date;
+  @UpdateDateColumn({ name: 'fecha_modificacion' })
+  fechaModificacion: Date;
 
-  @DeleteDateColumn({ name: 'fecha_eliminacion', select: false })
+  @DeleteDateColumn({ name: 'fecha_eliminacion' })
   fechaEliminacion: Date;
 
   @OneToMany(() => Producto, (producto) => producto.categoria)

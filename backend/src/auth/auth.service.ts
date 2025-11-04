@@ -13,16 +13,22 @@ export class AuthService {
   ) {}
 
   async login(authLoginDto: AuthLoginDto): Promise<any> {
-    const { email, password } = authLoginDto;
-    const empleado = await this.empleadosService.validate(email, password);
+    const { usuario, clave } = authLoginDto;
+    const empleado = await this.empleadosService.validate(usuario, clave);
 
-    const payload = { sub: empleado.id };
-    const access_token = this.jwtService.sign(payload, {
-      secret: process.env.JWT_TOKEN,
-      expiresIn: '1d',
-    });
+    const payload: JwtPayload = { sub: empleado.id };
+    const access_token = this.jwtService.sign(payload);
 
-    return { ...empleado, access_token };
+    return {
+      access_token,
+      empleado: {
+        id: empleado.id,
+        usuario: empleado.usuario,
+        nombre: empleado.nombre,
+        email: empleado.email,
+        rol: empleado.rol,
+      },
+    };
   }
 
   async verifyPayload(payload: JwtPayload): Promise<Empleado> {

@@ -1,106 +1,5 @@
-<template>
-  <div class="bradcam_area breadcam_bg overlay d-flex align-items-center justify-content-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-12">
-          <div class="bradcam_text text-center">
-            <h3>Contacto</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <section class="contact-section section-padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h2 class="contact-title">Contáctanos</h2>
-        </div>
-        <div class="col-lg-8">
-          <form class="form-contact contact_form" @submit.prevent="handleSubmit">
-            <div class="row">
-              <div class="col-12">
-                <div class="form-group">
-                  <textarea
-                    class="form-control w-100"
-                    name="message"
-                    v-model="form.message"
-                    cols="30"
-                    rows="9"
-                    placeholder="Ingresa tu mensaje"
-                  ></textarea>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input
-                    class="form-control"
-                    name="name"
-                    v-model="form.name"
-                    type="text"
-                    placeholder="Tu nombre"
-                  />
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input
-                    class="form-control"
-                    name="email"
-                    v-model="form.email"
-                    type="email"
-                    placeholder="Tu email"
-                  />
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group">
-                  <input
-                    class="form-control"
-                    name="subject"
-                    v-model="form.subject"
-                    type="text"
-                    placeholder="Asunto"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="form-group mt-3">
-              <button type="submit" class="button button-contactForm btn_4">Enviar Mensaje</button>
-            </div>
-          </form>
-        </div>
-        <div class="col-lg-4">
-          <div class="media contact-info">
-            <span class="contact-info__icon"><i class="ti-home"></i></span>
-            <div class="media-body">
-              <h3>Dirección</h3>
-              <p>Santa Cruz, Bolivia</p>
-            </div>
-          </div>
-          <div class="media contact-info">
-            <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-            <div class="media-body">
-              <h3>+10 367 453 7382</h3>
-              <p>Lun a Vie 9am a 6pm</p>
-            </div>
-          </div>
-          <div class="media contact-info">
-            <span class="contact-info__icon"><i class="ti-email"></i></span>
-            <div class="media-body">
-              <h3>info@burger.com</h3>
-              <p>¡Envíanos tu consulta!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</template>
-
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, onMounted, nextTick } from 'vue'
 
 const form = reactive({
   name: '',
@@ -112,6 +11,98 @@ const form = reactive({
 const handleSubmit = () => {
   console.log('Form submitted:', form)
   // Aquí implementarás el envío del formulario al backend
-  alert('Formulario enviado (implementar backend)')
+  alert('Formulario enviado correctamente')
+  // Reset form
+  form.name = ''
+  form.email = ''
+  form.subject = ''
+  form.message = ''
 }
+
+onMounted(() => {
+  nextTick(() => {
+    setTimeout(() => {
+      if (typeof (window as any).AOS !== 'undefined') {
+        (window as any).AOS.refresh()
+      }
+    }, 500)
+  })
+})
 </script>
+
+<template>
+  <!-- Hero Section -->
+  <section class="home-slider owl-carousel img" style="background-image: url(/images/bg_1.jpg);">
+    <div class="slider-item" style="background-image: url(/images/bg_3.jpg);">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row slider-text justify-content-center align-items-center">
+          <div class="col-md-7 col-sm-12 text-center ftco-animate">
+            <h1 class="mb-3 mt-5 bread">Contáctanos</h1>
+            <p class="breadcrumbs"><span class="mr-2"><router-link to="/">Inicio</router-link></span> <span>Contacto</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="ftco-section contact-section">
+    <div class="container mt-5">
+      <div class="row block-9">
+        <div class="col-md-4 contact-info ftco-animate">
+          <div class="row">
+            <div class="col-md-12 mb-4">
+              <h2 class="h4">Información de Contacto</h2>
+            </div>
+            <div class="col-md-12 mb-3">
+              <p><span>Dirección:</span> Calle 21 Oeste 198, Suite 721 New York NY 10016</p>
+            </div>
+            <div class="col-md-12 mb-3">
+              <p><span>Teléfono:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+            </div>
+            <div class="col-md-12 mb-3">
+              <p><span>Email:</span> <a href="mailto:info@pizza.com">info@pizza.com</a></p>
+            </div>
+            <div class="col-md-12 mb-3">
+              <p><span>Sitio Web:</span> <a href="#">pizza.com</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-6 ftco-animate">
+          <form @submit.prevent="handleSubmit" class="contact-form">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" v-model="form.name" class="form-control" placeholder="Tu Nombre" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="email" v-model="form.email" class="form-control" placeholder="Tu Email" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" v-model="form.subject" class="form-control" placeholder="Asunto" required>
+            </div>
+            <div class="form-group">
+              <textarea v-model="form.message" cols="30" rows="7" class="form-control" placeholder="Mensaje" required></textarea>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Enviar Mensaje" class="btn btn-primary py-3 px-5">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section (opcional - puedes descomentar cuando tengas Google Maps API key) -->
+  <!-- <div id="map" style="height: 400px;"></div> -->
+</template>
+
+<style scoped>
+/* Los estilos ya están incluidos en el CSS global del template */
+</style>

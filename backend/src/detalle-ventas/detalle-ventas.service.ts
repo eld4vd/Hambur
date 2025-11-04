@@ -14,8 +14,8 @@ export class DetalleVentasService {
 
   async create(createDetalleVentaDto: CreateDetalleVentaDto): Promise<DetalleVenta> {
     const detalle = new DetalleVenta();
-    detalle.ventaId = createDetalleVentaDto.ventaId;
-    detalle.productoId = createDetalleVentaDto.productoId;
+    detalle.idVenta = createDetalleVentaDto.idVenta;
+    detalle.idProducto = createDetalleVentaDto.idProducto;
     detalle.nombreProducto = createDetalleVentaDto.nombreProducto.trim();
     detalle.precioUnitario = createDetalleVentaDto.precioUnitario;
     detalle.cantidad = createDetalleVentaDto.cantidad;

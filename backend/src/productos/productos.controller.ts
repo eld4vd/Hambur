@@ -3,6 +3,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { ProductosService } from './productos.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
+import { Public } from 'src/auth/decorators/auth-public.decorator';
 
 @ApiTags('productos')
 @Controller('productos')
@@ -14,11 +15,13 @@ export class ProductosController {
     return this.productosService.create(createProductoDto);
   }
 
+  @Public()
   @Get()
   findAll() {
     return this.productosService.findAll();
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.productosService.findOne(+id);
@@ -32,5 +35,10 @@ export class ProductosController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.productosService.remove(+id);
+  }
+
+  @Post(':id/recalcular-precio')
+  recalcularPrecio(@Param('id') id: string) {
+    return this.productosService.recalcularPrecio(+id);
   }
 }

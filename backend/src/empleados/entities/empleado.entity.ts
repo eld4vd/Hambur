@@ -17,17 +17,23 @@ export class Empleado {
   @PrimaryGeneratedColumn('identity')
   id: number;
 
+  @Column('varchar', { length: 20, unique: true })
+  usuario: string;
+
+  @Column('varchar', { length: 250, select: false })
+  clave?: string;
+
   @Column('varchar', { length: 100, nullable: false })
   nombre: string;
 
   @Column('varchar', { length: 100, unique: true, nullable: false })
   email: string;
 
-  @Column('varchar', { length: 255, nullable: false })
-  password: string;
-
   @Column('varchar', { length: 20, nullable: true })
   telefono: string;
+
+  @Column('varchar', { length: 20, default: 'empleado' })
+  rol: string;
 
   @Column('boolean', { default: true })
   activo: boolean;
@@ -35,10 +41,10 @@ export class Empleado {
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
 
-  @UpdateDateColumn({ name: 'ultima_actualizacion' })
-  ultimaActualizacion: Date;
+  @UpdateDateColumn({ name: 'fecha_modificacion' })
+  fechaModificacion: Date;
 
-  @DeleteDateColumn({ name: 'fecha_eliminacion', select: false })
+  @DeleteDateColumn({ name: 'fecha_eliminacion' })
   fechaEliminacion: Date;
 
   @OneToMany(() => Venta, (venta) => venta.empleado)
@@ -47,11 +53,13 @@ export class Empleado {
   @BeforeInsert()
   @BeforeUpdate()
   async hashPassword() {
-    const salt = await bcrypt.genSalt();
-    this.password = await bcrypt.hash(this.password, salt);
+    if (this.clave) {
+      const salt = await bcrypt.genSalt();
+      this.clave = await bcrypt.hash(this.clave, salt);
+    }
   }
 
   async validatePassword(plainPassword: string): Promise<boolean> {
-    return bcrypt.compare(plainPassword, this.password);
+    return bcrypt.compare(plainPassword, this.clave || '');
   }
 }

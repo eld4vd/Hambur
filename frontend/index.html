@@ -1,42 +1,50 @@
 <!DOCTYPE html>
-<html lang="es" class="no-js">
+<html lang="es">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="icon" href="/favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burger Master</title>
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pizza Delicious</title>
     
-    <!-- CSS del template en orden correcto -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/css/magnific-popup.css">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/themify-icons.css">
-    <link rel="stylesheet" href="/css/nice-select.css">
-    <link rel="stylesheet" href="/css/flaticon.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos del dashboard -->
+    <link rel="stylesheet" href="/css/vue-fixes.css">
+    <link rel="stylesheet" href="/css/crud-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+    
+    <!-- CSS del template de pizza -->
+    <link rel="stylesheet" href="/css/open-iconic-bootstrap.min.css">
     <link rel="stylesheet" href="/css/animate.css">
-    <link rel="stylesheet" href="/css/slicknav.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+    <link rel="stylesheet" href="/css/aos.css">
+    <link rel="stylesheet" href="/css/ionicons.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="/css/flaticon.css">
+    <link rel="stylesheet" href="/css/icomoon.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/fix-styles.css">
+    <!-- Fix CSS debe ir AL FINAL para sobrescribir todo -->
+    <link rel="stylesheet" href="/fix-loader.css?v=9">
+    <link rel="stylesheet" href="/fix-styles.css?v=9">
     
     <style>
-      /* Reset importante para que Vue no interfiera */
-      * {
-        margin: 0;
-        padding: 0;
-      }
-      
+      /* Estilos mínimos - dejar que el CSS del template tome control */
       body {
         margin: 0 !important;
         padding: 0 !important;
         overflow-x: hidden !important;
+        font-family: 'Poppins', Arial, sans-serif !important;
       }
       
       #app {
-        margin: 0 !important;
-        padding: 0 !important;
-        max-width: 100% !important;
         width: 100% !important;
       }
     </style>
@@ -45,29 +53,24 @@
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
     
-    <!-- JS del template -->
-    <script src="/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- JS del template de pizza -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery-migrate-3.0.1.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.easing.1.3.js"></script>
+    <script src="/js/jquery.waypoints.min.js"></script>
+    <script src="/js/jquery.stellar.min.js"></script>
     <script src="/js/owl.carousel.min.js"></script>
-    <script src="/js/isotope.pkgd.min.js"></script>
-    <script src="/js/ajax-form.js"></script>
-    <script src="/js/waypoints.min.js"></script>
-    <script src="/js/jquery.counterup.min.js"></script>
-    <script src="/js/imagesloaded.pkgd.min.js"></script>
-    <script src="/js/scrollIt.js"></script>
-    <script src="/js/jquery.scrollUp.min.js"></script>
-    <script src="/js/wow.min.js"></script>
-    <script src="/js/nice-select.min.js"></script>
-    <script src="/js/jquery.slicknav.min.js"></script>
     <script src="/js/jquery.magnific-popup.min.js"></script>
-    <script src="/js/plugins.js"></script>
-    <script src="/js/contact.js"></script>
-    <script src="/js/jquery.ajaxchimp.min.js"></script>
-    <script src="/js/jquery.form.js"></script>
-    <script src="/js/jquery.validate.min.js"></script>
-    <script src="/js/mail-script.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/jquery.animateNumber.min.js"></script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+    <script src="/js/jquery.timepicker.min.js"></script>
+    <script src="/js/scrollax.min.js"></script>
+    <!-- Google Maps y google-map.js comentados - cargar solo en ContactView si es necesario -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+    <!-- <script src="/js/google-map.js"></script> -->
     <script src="/js/main.js"></script>
   </body>
 </html>

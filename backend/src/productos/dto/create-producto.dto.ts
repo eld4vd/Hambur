@@ -3,9 +3,14 @@ import { IsBoolean, IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, IsStrin
 
 export class CreateProductoDto {
   @ApiProperty()
-  @IsNotEmpty({ message: 'El campo categoriaId es obligatorio' })
-  @IsInt({ message: 'El campo categoriaId debe ser un número entero' })
-  readonly categoriaId: number;
+  @IsNotEmpty({ message: 'El campo idCategoria es obligatorio' })
+  @IsInt({ message: 'El campo idCategoria debe ser un número entero' })
+  readonly idCategoria: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsInt({ message: 'El campo idTamaño debe ser un número entero' })
+  readonly idTamaño?: number;
 
   @ApiProperty()
   @IsNotEmpty({ message: 'El campo nombre es obligatorio' })
